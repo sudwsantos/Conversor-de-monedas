@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="user"></div>
+
+    <script>
+         async function getRandomUser() {
+            try {
+                const res = await fetch("https://randomuser.me/api")
+                const data = await res.json()
+                console.log(data)
+                const user = document.querySelector(".user")
+                const email = data.results[0]['email']
+                const phone = data.results[0]['phone']
+                const title = data.results[0]['name']['title']
+                const first = data.results[0]['name']['first']
+                const last = data.results[0]['name']['last']
+                const full_name = title +' '+ first +' ' + last
+                const ciudad = data.results[0]['location']['city']
+                const imagen = data.results[0]['picture']['mediun']
+                user.innerHTML = `Email:${email} 
+                                  Phone:${phone} 
+                                  Nombre:${full_name}
+                                  Ciudad:${ciudad} 
+                                  Imagen:${imagen} `
+            } catch {
+                    alert('Falló!');
+                }
+            }
+
+            getRandomUser()
+    </script>
+</body>
+</html>
